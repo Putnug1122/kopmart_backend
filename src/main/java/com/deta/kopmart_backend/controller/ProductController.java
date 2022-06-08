@@ -73,9 +73,9 @@ public class ProductController {
     @GetMapping("/product/search")
     public Page<ProductInfo> search(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                     @RequestParam(value = "size", defaultValue = "3") Integer size,
-                                    @RequestParam(value = "keyword") String keyword) {
+                                    @RequestParam(value = "name") String productName) {
         PageRequest request = PageRequest.of(page - 1, size);
-        return productService.findAllByNameLike(keyword, request);
+        return productService.findAllByNameLike(productName, request);
     }
 
 }

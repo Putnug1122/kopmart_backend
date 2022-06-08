@@ -88,7 +88,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<ProductInfo> findAllByNameLike(String name, Pageable pageable) {
-        return productInfoRepository.findAllByProductNameLike(name, pageable);
+        return productInfoRepository.findAllByProductNameContainingIgnoreCase(name, pageable);
     }
 
     @Override

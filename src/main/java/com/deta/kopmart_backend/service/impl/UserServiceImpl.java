@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User update(User user) {
         User oldUser = userRepository.findByEmail(user.getEmail());
-        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
+//        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
         oldUser.setName(user.getName());
         oldUser.setPhone(user.getPhone());
         oldUser.setAddress(user.getAddress());

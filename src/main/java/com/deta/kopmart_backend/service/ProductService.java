@@ -3,6 +3,7 @@ package com.deta.kopmart_backend.service;
 import com.deta.kopmart_backend.entity.ProductInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ProductService {
     ProductInfo findOne(String productId);
