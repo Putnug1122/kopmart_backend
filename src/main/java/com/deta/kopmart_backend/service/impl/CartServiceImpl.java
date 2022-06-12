@@ -75,7 +75,7 @@ public class CartServiceImpl implements CartService {
             throw new MyException(ResultEnum.ORDER_STATUS_ERROR);
         }
 
-        var op = user.getCart().getProducts().stream().filter(e -> itemId.equals(e.getProductId())).findFirst();
+        Optional<ProductInOrder> op = user.getCart().getProducts().stream().filter(e -> itemId.equals(e.getProductId())).findFirst();
         op.ifPresent(productInOrder -> {
             productInOrder.setCart(null);
             productInOrderRepository.deleteById(productInOrder.getId());
