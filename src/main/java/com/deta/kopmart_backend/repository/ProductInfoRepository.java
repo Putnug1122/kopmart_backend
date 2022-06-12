@@ -16,6 +16,8 @@ public interface ProductInfoRepository extends JpaRepository<ProductInfo, String
 
     Page<ProductInfo> findAllByOrderByProductId(Pageable pageable);
 
-
     Page<ProductInfo> findAllByProductNameContainingIgnoreCase(String name, Pageable pageable);
+
+//    get four newest products
+    Page<ProductInfo> findTop4ByOrderByProductIdDesc(Pageable pageable);
 }

@@ -78,4 +78,10 @@ public class ProductController {
         return productService.findAllByNameLike(productName, request);
     }
 
+     @GetMapping("/product/new")
+    public Page<ProductInfo> findFourNewestProducts(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                    @RequestParam(value = "size", defaultValue = "4") Integer size) {
+         PageRequest request = PageRequest.of(page - 1, size);
+         return productService.findFourNewestProducts(request);
+     }
 }

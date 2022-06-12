@@ -92,6 +92,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Page<ProductInfo> findFourNewestProducts(Pageable pageable) {
+        return productInfoRepository.findTop4ByOrderByProductIdDesc(pageable);
+    }
+
+    @Override
     @Transactional
     public ProductInfo offSale(String productId) {
         ProductInfo productInfo = findOne(productId);

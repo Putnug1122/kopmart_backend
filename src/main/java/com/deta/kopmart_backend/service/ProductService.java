@@ -27,4 +27,6 @@ public interface ProductService {
     void increaseStock(String productId, int amount);
 
     Page<ProductInfo> findAllByNameLike(String name, Pageable pageable);
+
+    Page<ProductInfo> findFourNewestProducts(Pageable pageable);
 }
