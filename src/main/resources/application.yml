@@ -4,9 +4,9 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: asdf
-    url: jdbc:postgresql://localhost:5432/kopmart
+    username: grbmxgdwyhnohn
+    password: d86897ee5000aaf571eb030102e15909da3a7a2a06618ee7da6076baa6490a69
+    url: jdbc:postgresql://ec2-34-198-186-145.compute-1.amazonaws.com:5432/d52ucp2itbdsj5
     platform: postgres
     initialization-mode: always
     continue-on-error: true
