@@ -2,6 +2,10 @@ package com.deta.kopmart_backend.vo.response;
 
 import lombok.Data;
 
+/**
+ * @author deta
+ * @description Class for JWT response mapper
+ */
 @Data
 public class JwtResponse {
     private String token;

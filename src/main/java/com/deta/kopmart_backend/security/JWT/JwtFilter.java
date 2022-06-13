@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author deta
+ * @description Class for filtering the Json Web Token Request
+ */
 @Component
 public class JwtFilter extends OncePerRequestFilter{
     @Autowired
@@ -23,6 +27,14 @@ public class JwtFilter extends OncePerRequestFilter{
     @Autowired
     private UserService userService;
 
+    /**
+     * @param httpServletRequest The request object
+     * @param httpServletResponse The response object
+     * @param filterChain The filter chain
+     * @throws ServletException If there is an error processing the request
+     * @throws IOException If there is an error writing the response
+     * @description This method is called when the request is received. It checks if the request is a Json Web Token request.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String jwt = getToken(httpServletRequest);
@@ -46,6 +58,11 @@ public class JwtFilter extends OncePerRequestFilter{
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
+    /**
+     * @param request The request object
+     * @return Authorization header value
+     * @description This method is used to get the Json Web Token from the request.
+     */
     private String getToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
 

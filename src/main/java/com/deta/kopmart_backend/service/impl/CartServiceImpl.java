@@ -22,6 +22,10 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * @author deta
+ * @description Concrete implementation of CartService
+ */
 @Service
 public class CartServiceImpl implements CartService {
 
@@ -43,11 +47,21 @@ public class CartServiceImpl implements CartService {
     @Autowired
     UserService userService;
 
+    /**
+     * @param user User who's cart is being retrieved
+     * @return Cart object
+     * @description Retrieves the cart for the user
+     */
     @Override
     public Cart getCart(User user) {
         return user.getCart();
     }
 
+    /**
+     * @param productInOrders Collection of ProductInOrder objects
+     * @param user User who's cart is being merged
+     * @description Merges the local cart with the cart in the database
+     */
     @Override
     public void mergeLocalCart(Collection<ProductInOrder> productInOrders, User user) {
         Cart finalCart = user.getCart();
@@ -68,6 +82,11 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(finalCart);
     }
 
+    /**
+     * @param itemId ItemId of the product being deleted
+     * @param user User who's cart is being deleted
+     * @description Deletes the product from the cart
+     */
     @Override
     @Transactional
     public void delete(String itemId, User user) {
@@ -82,6 +101,10 @@ public class CartServiceImpl implements CartService {
         });
     }
 
+    /**
+     * @param user User who's cart is being checked out
+     * @description Checks out the cart and creates an order
+     */
     @Override
     @Transactional
     public void checkout(User user) {

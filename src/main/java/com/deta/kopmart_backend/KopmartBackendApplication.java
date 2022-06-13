@@ -23,11 +23,19 @@ import java.util.Collections;
 @EnableSwagger2
 public class KopmartBackendApplication {
 
+	/**
+	 * @return the passwordEncoder
+	 * @description PasswordEncoder Bean
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * @return WebMvcConfigurer
+	 * @description CORS configuration for the application
+	 */
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurerAdapter() {
@@ -42,6 +50,10 @@ public class KopmartBackendApplication {
 		SpringApplication.run(KopmartBackendApplication.class, args);
 	}
 
+	/**
+	 * @return Swagger2 API documentation
+	 * @description Swagger2 API documentation
+	 */
 	@Bean
 	public Docket swaggerConfiguration() {
 		return new Docket(DocumentationType.SWAGGER_2)
@@ -52,6 +64,10 @@ public class KopmartBackendApplication {
 				.apiInfo(apiInfo());
 	}
 
+	/**
+	 * @return ApiInfo
+	 * @author deta
+	 */
 	private ApiInfo apiInfo() {
 		ApiInfo appinfo = new ApiInfo(
 				"Kopmart API Documentation",

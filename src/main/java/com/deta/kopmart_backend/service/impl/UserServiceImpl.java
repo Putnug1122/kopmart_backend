@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
+/**
+ * @author deta
+ * @description Concrete implementation of UserService
+ */
 @Service
 @DependsOn("passwordEncoder")
 public class UserServiceImpl implements UserService {
@@ -29,11 +33,22 @@ public class UserServiceImpl implements UserService {
     CartRepository cartRepository;
 
 
+    /**
+     * @param email String of email
+     * @return User
+     * @description Get user by email
+     */
     @Override
     public User findOne(String email) {
         return userRepository.findByEmail(email);
     }
 
+    /**
+     * @param user User Object
+     * @return User
+     * @description Register a new user
+     * @throws MyException if the user already exists
+     */
     @Override
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -50,17 +65,26 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * @param user User Object
+     * @return User
+     * @description Update user
+     */
     @Override
     @Transactional
     public User update(User user) {
         User oldUser = userRepository.findByEmail(user.getEmail());
-//        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
         oldUser.setName(user.getName());
         oldUser.setPhone(user.getPhone());
         oldUser.setAddress(user.getAddress());
         return userRepository.save(oldUser);
     }
 
+    /**
+     * @param role String of role
+     * @return Collection<User>
+     * @description Get all users by role
+     */
     @Override
     public Collection<User> findByRole(String role) {
         return userRepository.findAllByRole(role);

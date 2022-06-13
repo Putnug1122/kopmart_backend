@@ -11,12 +11,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * @author deta
+ * @description Concrete implementation of CategoryService
+ */
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     ProductCategoryRepository productCategoryRepository;
 
+    /**
+     * @param categoryType category type
+     * @return List of ProductCategory
+     * @throws MyException if category type is invalid
+     * @description Get all product categories by category type
+     */
     @Override
     public ProductCategory findByCategoryType(Integer categoryType) {
         ProductCategory res = productCategoryRepository.findByCategoryType(categoryType);
@@ -24,6 +34,11 @@ public class CategoryServiceImpl implements CategoryService {
         return res;
     }
 
+    /**
+     * @param categoryTypeList category type list
+     * @return List of ProductCategory
+     * @description Get all product categories by category type list
+     */
     @Override
     public List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList) {
         List<ProductCategory> res = productCategoryRepository.findByCategoryTypeInOrderByCategoryTypeAsc(categoryTypeList);
@@ -31,6 +46,10 @@ public class CategoryServiceImpl implements CategoryService {
         return res;
     }
 
+    /**
+     * @return List of ProductCategory
+     * @description Get all product categories
+     */
     @Override
     public List<ProductCategory> findAll() {
         List<ProductCategory> res = productCategoryRepository.findAllByOrderByCategoryType();
@@ -38,6 +57,11 @@ public class CategoryServiceImpl implements CategoryService {
         return res;
     }
 
+    /**
+     * @param productCategory product category
+     * @return ProductCategory
+     * @description Create a new product category
+     */
     @Override
     @Transactional
     public ProductCategory save(ProductCategory productCategory) {

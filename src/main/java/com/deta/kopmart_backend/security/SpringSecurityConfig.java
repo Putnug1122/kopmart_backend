@@ -19,6 +19,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.sql.DataSource;
 
+/**
+ * @author deta
+ * @description Class for Spring Security Configuration
+ */
 @Configuration
 @EnableWebSecurity
 @DependsOn("passwordEncoder")
@@ -44,6 +48,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private String rolesQuery;
 
 
+    /**
+     * @param auth AuthenticationManagerBuilder
+     * @throws Exception Exception
+     * @description Method for configure AuthenticationManager
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -54,12 +63,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder);
     }
 
+    /**
+     * @return AuthenticationManager
+     * @throws Exception Exception
+     * @description Method for configure AuthenticationManager
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * @param http HttpSecurity
+     * @throws Exception Exception
+     * @description Method for configure access to resources by role
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

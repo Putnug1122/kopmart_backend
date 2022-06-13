@@ -18,6 +18,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author deta
+ * @description Concrete implementation of OrderService
+ */
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -32,26 +36,54 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     ProductInOrderRepository productInOrderRepository;
 
+    /**
+     * @param pageable Pageable object
+     * @return Page of OrderMain objects
+     * @description Get all orders
+     */
     @Override
     public Page<OrderMain> findAll(Pageable pageable) {
         return orderRepository.findAllByOrderByOrderStatusAscCreateTimeDesc(pageable);
     }
 
+    /**
+     * @param email Email of user
+     * @param pageable Pageable object
+     * @return Page of OrderMain objects
+     * @description Get all orders of user by email
+     */
     @Override
     public Page<OrderMain> findByBuyerEmail(String email, Pageable pageable) {
         return orderRepository.findAllByBuyerEmailOrderByOrderStatusAscCreateTimeDesc(email, pageable);
     }
 
+    /**
+     * @param status Order status
+     * @param pageable Pageable object
+     * @return Page of OrderMain objects
+     * @description Get all orders by status
+     */
     @Override
     public Page<OrderMain> findByStatus(Integer status, Pageable pageable) {
         return orderRepository.findAllByOrderStatusOrderByCreateTimeDesc(status, pageable);
     }
 
+    /**
+     * @param phone Phone of user
+     * @param pageable Pageable object
+     * @return Page of OrderMain objects
+     * @description Get all orders of user by phone
+     */
     @Override
     public Page<OrderMain> findByBuyerPhone(String phone, Pageable pageable) {
         return orderRepository.findAllByBuyerPhoneOrderByOrderStatusAscCreateTimeDesc(phone, pageable);
     }
 
+    /**
+     * @param orderId Order id
+     * @return OrderMain object
+     * @description Get order by order id
+     */
     @Override
     public OrderMain findOne(Long orderId) {
         OrderMain orderMain = orderRepository.findByOrderId(orderId);
@@ -61,6 +93,12 @@ public class OrderServiceImpl implements OrderService {
         return orderMain;
     }
 
+    /**
+     * @param orderId Order id
+     * @return OrderMain object
+     * @description Confirm order by order id
+     * @throws MyException If order not found
+     */
     @Override
     @Transactional
     public OrderMain finish(Long orderId) {
@@ -74,6 +112,12 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findByOrderId(orderId);
     }
 
+    /**
+     * @param orderId Order id
+     * @return OrderMain object
+     * @description Cancel order by order id
+     * @throws MyException If order not found
+     */
     @Override
     public OrderMain cancel(Long orderId) {
         OrderMain orderMain = findOne(orderId);

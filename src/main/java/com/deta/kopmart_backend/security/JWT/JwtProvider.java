@@ -11,6 +11,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * @author deta
+ * @description Class for provide JWT token
+ */
 @Component
 public class JwtProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
@@ -19,6 +23,11 @@ public class JwtProvider {
     @Value("${jwtExpiration}")
     private int jwtExpiration;
 
+    /**
+     * @param authentication Authentication object
+     * @return JWT token
+     * @description Method for generate JWT token with expiration time and Hash algorithm
+     */
     public String generate(Authentication authentication) {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -30,6 +39,11 @@ public class JwtProvider {
                 .compact();
     }
 
+    /**
+     * @param token String of JWT token
+     * @return boolean value
+     * @description Method for check JWT token is valid or not
+     */
     public boolean validate(String token) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
@@ -40,6 +54,11 @@ public class JwtProvider {
         return false;
     }
 
+    /**
+     * @param token String of JWT token
+     * @return User information contained in JWT token
+     * @description Method for get user information from JWT token
+     */
     public String getUserAccount(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token)
                 .getBody().getSubject();

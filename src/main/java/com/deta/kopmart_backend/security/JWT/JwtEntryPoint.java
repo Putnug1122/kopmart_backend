@@ -12,12 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author deta
+ * @description JwtAuthenticationEntryPoint
+ */
 @Component
 public class JwtEntryPoint implements AuthenticationEntryPoint {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtEntryPoint.class);
 
 
+    /**
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @param authException AuthenticationException
+     * @throws IOException IOException
+     * @throws ServletException ServletException
+     * @description method to handle json web token authentication entry point
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         logger.error("Unauthorized error. Message - {}", authException.getMessage());
