@@ -29,6 +29,11 @@ public class UserController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    /**
+     * @param loginForm - username (email) and password
+     * @return - ResponseEntity<JwtResponse>
+     * @description method for login with username (email) and password and return JSON Web Token
+     */
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody LoginForm loginForm) {
         try {
@@ -44,6 +49,11 @@ public class UserController {
         }
     }
 
+    /**
+     * @param user - User object
+     * @return - ResponseEntity<User>
+     * @description method for register new user
+     */
     @PostMapping("/register")
     public ResponseEntity<User> save(@RequestBody User user) {
         try {
@@ -53,6 +63,12 @@ public class UserController {
         }
     }
 
+    /**
+     * @param user - User object
+     * @param principal - Principal object
+     * @return - ResponseEntity<User>
+     * @description method for update user profile
+     */
     @PutMapping("/profile")
     public ResponseEntity<User> update(@RequestBody User user, Principal principal) {
 
@@ -64,6 +80,12 @@ public class UserController {
         }
     }
 
+    /**
+     * @param email - email of user
+     * @param principal - Principal object
+     * @return - ResponseEntity<User> - user object by email
+     * @description method for get user object by email
+     */
     @GetMapping("/profile/{email}")
     public ResponseEntity<User> getProfile(@PathVariable("email") String email, Principal principal) {
         if (principal.getName().equals(email)) {

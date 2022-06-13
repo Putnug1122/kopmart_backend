@@ -1,0 +1,254 @@
+@startuml
+
+title __ENTITY's Class Diagram__\n
+
+  namespace com.deta.kopmart_backend {
+    namespace entity {
+      class com.deta.kopmart_backend.entity.Cart {
+          - cartId : long
+          - products : Set<ProductInOrder>
+          + Cart()
+          + Cart()
+          + equals()
+          + getCartId()
+          + getProducts()
+          + getUser()
+          + hashCode()
+          + setCartId()
+          + setProducts()
+          + setUser()
+          + toString()
+          # canEqual()
+      }
+    }
+  }
+  
+
+  namespace com.deta.kopmart_backend {
+    namespace entity {
+      class com.deta.kopmart_backend.entity.OrderMain {
+          - buyerAddress : String
+          - buyerEmail : String
+          - buyerName : String
+          - buyerPhone : String
+          - createTime : LocalDateTime
+          - orderAmount : BigDecimal
+          - orderId : Long
+          - orderStatus : Integer
+          - products : Set<ProductInOrder>
+          {static} - serialVersionUID : long
+          - updateTime : LocalDateTime
+          + OrderMain()
+          + OrderMain()
+          + equals()
+          + getBuyerAddress()
+          + getBuyerEmail()
+          + getBuyerName()
+          + getBuyerPhone()
+          + getCreateTime()
+          + getOrderAmount()
+          + getOrderId()
+          + getOrderStatus()
+          + getProducts()
+          + getUpdateTime()
+          + hashCode()
+          + setBuyerAddress()
+          + setBuyerEmail()
+          + setBuyerName()
+          + setBuyerPhone()
+          + setCreateTime()
+          + setOrderAmount()
+          + setOrderId()
+          + setOrderStatus()
+          + setProducts()
+          + setUpdateTime()
+          + toString()
+          # canEqual()
+      }
+    }
+  }
+  
+
+  namespace com.deta.kopmart_backend {
+    namespace entity {
+      class com.deta.kopmart_backend.entity.ProductCategory {
+          - categoryId : Integer
+          - categoryName : String
+          - categoryType : Integer
+          - createTime : Date
+          - updateTime : Date
+          + ProductCategory()
+          + ProductCategory()
+          + equals()
+          + getCategoryId()
+          + getCategoryName()
+          + getCategoryType()
+          + getCreateTime()
+          + getUpdateTime()
+          + hashCode()
+          + setCategoryId()
+          + setCategoryName()
+          + setCategoryType()
+          + setCreateTime()
+          + setUpdateTime()
+          + toString()
+          # canEqual()
+      }
+    }
+  }
+  
+
+  namespace com.deta.kopmart_backend {
+    namespace entity {
+      class com.deta.kopmart_backend.entity.ProductInOrder {
+          - categoryType : Integer
+          - count : Integer
+          - id : Long
+          - productDescription : String
+          - productIcon : String
+          - productId : String
+          - productName : String
+          - productPrice : BigDecimal
+          - productStock : Integer
+          + ProductInOrder()
+          + ProductInOrder()
+          + equals()
+          + getCart()
+          + getCategoryType()
+          + getCount()
+          + getId()
+          + getOrderMain()
+          + getProductDescription()
+          + getProductIcon()
+          + getProductId()
+          + getProductName()
+          + getProductPrice()
+          + getProductStock()
+          + hashCode()
+          + setCart()
+          + setCategoryType()
+          + setCount()
+          + setId()
+          + setOrderMain()
+          + setProductDescription()
+          + setProductIcon()
+          + setProductId()
+          + setProductName()
+          + setProductPrice()
+          + setProductStock()
+          + toString()
+      }
+    }
+  }
+  
+
+  namespace com.deta.kopmart_backend {
+    namespace entity {
+      class com.deta.kopmart_backend.entity.ProductInfo {
+          - categoryType : Integer
+          - createTime : Date
+          - productDescription : String
+          - productIcon : String
+          - productId : String
+          - productName : String
+          - productPrice : BigDecimal
+          - productStatus : Integer
+          - productStock : Integer
+          - updateTime : Date
+          + ProductInfo()
+          + equals()
+          + getCategoryType()
+          + getCreateTime()
+          + getProductDescription()
+          + getProductIcon()
+          + getProductId()
+          + getProductName()
+          + getProductPrice()
+          + getProductStatus()
+          + getProductStock()
+          + getUpdateTime()
+          + hashCode()
+          + setCategoryType()
+          + setCreateTime()
+          + setProductDescription()
+          + setProductIcon()
+          + setProductId()
+          + setProductName()
+          + setProductPrice()
+          + setProductStatus()
+          + setProductStock()
+          + setUpdateTime()
+          + toString()
+          # canEqual()
+      }
+    }
+  }
+  
+
+  namespace com.deta.kopmart_backend {
+    namespace entity {
+      class com.deta.kopmart_backend.entity.User {
+          - active : boolean
+          - address : String
+          - email : String
+          - id : Long
+          - name : String
+          - password : String
+          - phone : String
+          - role : String
+          {static} - serialVersionUID : long
+          + User()
+          + equals()
+          + getAddress()
+          + getCart()
+          + getEmail()
+          + getId()
+          + getName()
+          + getPassword()
+          + getPhone()
+          + getRole()
+          + hashCode()
+          + isActive()
+          + setActive()
+          + setAddress()
+          + setCart()
+          + setEmail()
+          + setId()
+          + setName()
+          + setPassword()
+          + setPhone()
+          + setRole()
+          + toString()
+          # canEqual()
+      }
+    }
+  }
+  
+
+  namespace com.deta.kopmart_backend {
+    namespace entity {
+      class com.deta.kopmart_backend.entity.Wishlist {
+      }
+    }
+  }
+  
+
+  com.deta.kopmart_backend.entity.Cart .up.|> java.io.Serializable
+  com.deta.kopmart_backend.entity.Cart o-- com.deta.kopmart_backend.entity.User : user
+  com.deta.kopmart_backend.entity.OrderMain .up.|> java.io.Serializable
+  com.deta.kopmart_backend.entity.ProductCategory .up.|> java.io.Serializable
+  com.deta.kopmart_backend.entity.ProductInOrder o-- com.deta.kopmart_backend.entity.Cart : cart
+  com.deta.kopmart_backend.entity.ProductInOrder o-- com.deta.kopmart_backend.entity.OrderMain : orderMain
+  com.deta.kopmart_backend.entity.ProductInfo .up.|> java.io.Serializable
+  com.deta.kopmart_backend.entity.User .up.|> java.io.Serializable
+  com.deta.kopmart_backend.entity.User o-- com.deta.kopmart_backend.entity.Cart : cart
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

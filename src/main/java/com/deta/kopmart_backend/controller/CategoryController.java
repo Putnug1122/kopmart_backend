@@ -10,6 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author deta
+ * @description Controller for category
+ */
 @RestController
 @CrossOrigin
 public class CategoryController {
@@ -19,6 +23,13 @@ public class CategoryController {
     @Autowired
     ProductService productService;
 
+    /**
+     * @param categoryType category type
+     * @param page page number
+     * @param size page size
+     * @return category page
+     * @description get category type by page
+     */
     @GetMapping("/category/{type}")
     public CategoryPage showOne(@PathVariable("type") Integer categoryType, @RequestParam(value = "page", defaultValue = "1") Integer page,
                                 @RequestParam(value = "size", defaultValue = "3") Integer size) {

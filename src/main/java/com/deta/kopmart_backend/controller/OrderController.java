@@ -24,6 +24,14 @@ public class OrderController {
     @Autowired
     UserService userService;
 
+    /**
+     * @param page page number
+     * @param size size of page
+     * @param authentication authentication
+     * @return list of order
+     * @throws Exception
+     * @description Get list of order for role except customer
+     */
     @GetMapping("/order")
     public Page<OrderMain> orderList(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                      @RequestParam(value = "size", defaultValue = "10") Integer size,
@@ -38,6 +46,12 @@ public class OrderController {
         return orderPage;
     }
 
+    /**
+     * @param orderId order id
+     * @param authentication authentication
+     * @return ResponseEntity with status OK and order
+     * @description Method to cancel order by order id
+     */
     @PatchMapping("/order/cancel/{id}")
     public ResponseEntity<OrderMain> cancel(@PathVariable("id") Long orderId, Authentication authentication) {
         OrderMain orderMain = orderService.findOne(orderId);
@@ -48,6 +62,12 @@ public class OrderController {
         return ResponseEntity.ok(orderService.cancel(orderId));
     }
 
+    /**
+     * @param orderId - order id
+     * @param authentication - authentication
+     * @return ResponseEntity with status OK and order
+     * @description Method to confirm order by order id
+     */
     @PatchMapping("/order/finish/{id}")
     public ResponseEntity<OrderMain> finish(@PathVariable("id") Long orderId, Authentication authentication) {
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_CUSTOMER"))) {
@@ -56,6 +76,12 @@ public class OrderController {
         return ResponseEntity.ok(orderService.finish(orderId));
     }
 
+    /**
+     * @param orderId - order id
+     * @param authentication - authentication
+     * @return ResponseEntity with status OK and order
+     * @description Method show order by order id
+     */
     @GetMapping("/order/{id}")
     public ResponseEntity show(@PathVariable("id") Long orderId, Authentication authentication) {
         boolean isCustomer = authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_CUSTOMER"));

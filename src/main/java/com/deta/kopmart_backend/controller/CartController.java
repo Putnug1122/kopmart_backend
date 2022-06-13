@@ -18,6 +18,11 @@ import java.security.Principal;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * @author deta
+ * @date 2022/06/13
+ * @description Cart Controller class for handling cart related requests from the client side.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/cart")
@@ -38,6 +43,13 @@ public class CartController {
     @Autowired
     ProductInOrderRepository productInOrderRepository;
 
+    /**
+     * @param productInOrders - Collection of product in order objects.
+     * @param principal
+     * @return - ResponseEntity object containing the cart object.
+     * @description - This method is used to add products to the cart.
+     * @throws Exception
+     */
     @PostMapping("")
     public ResponseEntity<Cart> mergeCart(@RequestBody Collection<ProductInOrder> productInOrders, Principal principal) {
         User user = userService.findOne(principal.getName());
@@ -49,12 +61,24 @@ public class CartController {
         return ResponseEntity.ok(cartService.getCart(user));
     }
 
+    /**
+     * @param principal - Principal object containing the user property.
+     * @return - Cart object by the user property.
+     * @description - This method is used to get the cart object by the user property.
+     */
     @GetMapping("")
     public Cart getCart(Principal principal) {
         User user = userService.findOne(principal.getName());
         return cartService.getCart(user);
     }
 
+    /**
+     * @param form - ItemForm object containing the product id and the quantity.
+     * @param principal - Principal object containing the user property.
+     * @return - boolean value indicating the success of the operation.
+     * @throws Exception - Exception thrown if the operation fails.
+     * @description - This method is used to add products to the cart.
+     */
     @PostMapping("/add")
     public boolean addToCart(@RequestBody ItemForm form, Principal principal) {
         ProductInfo productInfo = productService.findOne(form.getProductId());
@@ -66,6 +90,13 @@ public class CartController {
         return true;
     }
 
+    /**
+     * @param itemId - String value containing the product id.
+     * @param quantity - Integer value containing the quantity.
+     * @param principal - Principal object containing the user property.
+     * @return - ProductInOrder object containing the product info.
+     * @description - This method is used to update the quantity of the product in the cart.
+     */
     @PutMapping("/{itemId}")
     public ProductInOrder modifyItem(@PathVariable("itemId") String itemId, @RequestBody Integer quantity, Principal principal) {
         User user = userService.findOne(principal.getName());
@@ -73,6 +104,11 @@ public class CartController {
         return productInOrderService.findOne(itemId, user);
     }
 
+    /**
+     * @param itemId - String value containing the product id.
+     * @param principal - Principal object containing the user property.
+     * @description - This method is used to remove the product from the cart.
+     */
     @DeleteMapping("/{itemId}")
     public void deleteItem(@PathVariable("itemId") String itemId, Principal principal) {
         User user = userService.findOne(principal.getName());
@@ -81,6 +117,11 @@ public class CartController {
     }
 
 
+    /**
+     * @param principal - Principal object containing the user property.
+     * @return - ResponseEntity object containing the cart object.
+     * @description - This method is used to clear the cart.
+     */
     @PostMapping("/checkout")
     public ResponseEntity checkout(Principal principal) {
         User user = userService.findOne(principal.getName());// Email as username
